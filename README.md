@@ -4,6 +4,18 @@
 First install cuda in WSL (see CUDA docs).
 Then:
 
+docker:
+
+```bash
+# Start WebUI with CUDA
+docker compose --profile webui up
+
+# Start WebUI with compile optimization
+COMPILE=1 docker compose --profile webui up
+```
+
+miniconda:
+
 ```bash
 
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
