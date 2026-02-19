@@ -1,3 +1,47 @@
+
+# info
+
+First install cuda in WSL (see CUDA docs).
+Then:
+
+```bash
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash ~/Miniconda3-latest-Linux-x86_64.sh
+
+# optional
+source <PATH_TO_CONDA>/bin/activate
+conda init --all
+
+
+conda create -n fish-speech python=3.12
+conda activate fish-speech
+
+# install portaudio
+conda install -c conda-forge portaudio
+
+# GPU installation (choose your CUDA version: cu126, cu128, cu129)
+pip install -e .[cu126]
+# Default installation (uses PyTorch default index)
+pip  install -e .
+
+
+# fix torchaudio bug
+pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu126
+
+hf auth login
+# find token in huggingface.co account
+hf download fishaudio/s1-mini --local-dir checkpoints/openaudio-s1-mini
+
+# add at the bottom in launch() share=True
+nano tools/run_webui.py
+
+# run UI
+python  -m tools.run_webui
+
+```
+
+
 <div align="center">
 <h1>Fish Speech</h1>
 
